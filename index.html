@@ -130,11 +130,39 @@ canvas{display:block;width:100%;background:transparent}
 <!-- STEP 1: LOAD TRACK -->
 <div class="unit">
   <div class="ulbl">Step 1 — Load a guitar track</div>
-  <div class="row" style="margin-bottom:8px">
-    <input class="inp" id="file-inp" type="file" accept=".mp3,.wav,.ogg,.flac" style="cursor:pointer;flex:1" onchange="fileReady(this)">
-    <button class="btn go" id="analyze-btn" onclick="analyzeFile()" disabled>Extract tone</button>
+  <div class="tabs" style="display:flex;gap:6px;margin-bottom:13px">
+    <div class="tab on" id="tab-file" onclick="switchTab('file')">MP3 / WAV file</div>
+    <div class="tab" id="tab-yt" onclick="switchTab('yt')">YouTube</div>
   </div>
-  <div style="font-size:11px;color:var(--tx2)">Load an MP3 or WAV of a guitar tone you want to match. Works best with isolated guitar or a dry recording.</div>
+
+  <div id="src-file">
+    <div class="row" style="margin-bottom:8px">
+      <input class="inp" id="file-inp" type="file" accept=".mp3,.wav,.ogg,.flac" style="cursor:pointer;flex:1" onchange="fileReady(this)">
+      <button class="btn go" id="analyze-btn" onclick="analyzeFile()" disabled>Extract tone</button>
+    </div>
+    <div style="font-size:11px;color:var(--tx2)">Load an MP3 or WAV of a guitar tone you want to match. Works best with isolated guitar or a dry recording.</div>
+  </div>
+
+  <div id="src-yt" style="display:none">
+    <div class="row" style="margin-bottom:10px">
+      <input class="inp" id="yt-url" placeholder="https://www.youtube.com/watch?v=..." style="flex:1">
+      <button class="btn go" onclick="openConverter()">Get MP3</button>
+    </div>
+    <div style="background:var(--p3);border:1px solid var(--bd);border-radius:9px;padding:13px;font-size:12px;line-height:1.9;color:var(--tx2)">
+      <div style="color:var(--ac);font-size:10px;letter-spacing:2px;margin-bottom:8px">HOW TO USE YOUTUBE</div>
+      <div><span style="color:var(--ac2)">1.</span> Paste the YouTube URL above</div>
+      <div><span style="color:var(--ac2)">2.</span> Click <span style="color:var(--ac)">"Get MP3"</span> — a converter site opens with the URL pre-filled</div>
+      <div><span style="color:var(--ac2)">3.</span> Download the MP3 from that site (takes ~10 seconds)</div>
+      <div><span style="color:var(--ac2)">4.</span> Come back here, switch to the <span style="color:var(--ac)">"MP3 / WAV file"</span> tab and load it</div>
+      <div style="margin-top:10px;font-size:11px;color:var(--tx3)">Recommended converter: yt1s.com — free, no signup needed</div>
+    </div>
+    <div class="row" style="margin-top:10px;gap:6px;flex-wrap:wrap">
+      <button class="btn" style="font-size:11px" onclick="openSite('https://yt1s.com')">Open yt1s.com</button>
+      <button class="btn" style="font-size:11px" onclick="openSite('https://y2mate.com')">Open y2mate.com</button>
+      <button class="btn" style="font-size:11px" onclick="openSite('https://cobalt.tools')">Open cobalt.tools</button>
+    </div>
+  </div>
+
   <div class="prow">
     <div class="dot" id="sdot"></div>
     <div class="ptrack"><div class="pfill" id="prog"></div></div>
@@ -279,6 +307,21 @@ const KS = {};
 KD.forEach(k => KS[k.id] = k.def);
 
 /* ── file handling ── */
+function switchTab(t) {
+  document.getElementById('src-file').style.display = t==='file'?'block':'none';
+  document.getElementById('src-yt').style.display   = t==='yt'  ?'block':'none';
+  document.getElementById('tab-file').className = 'tab'+(t==='file'?' on':'');
+  document.getElementById('tab-yt').className   = 'tab'+(t==='yt'  ?' on':'');
+}
+
+function openConverter() {
+  const url = document.getElementById('yt-url').value.trim();
+  const base = 'https://yt1s.com';
+  window.open(url ? base+'?q='+encodeURIComponent(url) : base, '_blank');
+}
+
+function openSite(url) { window.open(url, '_blank'); }
+
 function fileReady(inp) {
   document.getElementById('analyze-btn').disabled = !inp.files.length;
   audioBuf = null;
