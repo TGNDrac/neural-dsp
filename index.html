@@ -7,465 +7,476 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07070d;--panel:#0f0f18;--p2:#14141f;--p3:#1a1a28;
-  --bd:#252535;--bd2:#303048;
-  --ac:#00e5ff;--ac2:#7c4dff;--ac3:#ff6b35;--ac4:#00e676;
-  --tx:#dde0f0;--tx2:#6a6a8a;--tx3:#4a4a6a;
-  --rd:#ff1744;--gr:#00e676;--am:#ffab00;
+  --bg:#07070d;--panel:#0f0f18;--p2:#13131e;--p3:#181826;
+  --bd:#222233;--bd2:#2e2e44;
+  --ac:#00e5ff;--ac2:#7c4dff;--ac3:#ff6b35;--gr:#00e676;--rd:#ff1744;--am:#ffab00;
+  --tx:#dde0f0;--tx2:#6a6a8a;--tx3:#3a3a5a;
 }
-html,body{height:100%;overflow-x:hidden}
-body{background:var(--bg);color:var(--tx);font-family:'Courier New',monospace;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--tx);font-family:'Courier New',monospace}
+body{padding:18px}
+.app{max-width:860px;margin:0 auto}
 
-/* ── layout ── */
-.app{max-width:900px;margin:0 auto;padding:20px}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--bd)}
-.logo{font-size:24px;font-weight:700;letter-spacing:5px}.logo em{color:var(--ac);font-style:normal}
-.logo-sub{font-size:10px;letter-spacing:3px;color:var(--tx2);margin-top:2px}
-.version{font-size:10px;letter-spacing:2px;color:var(--tx2);background:var(--p2);border:1px solid var(--bd);padding:5px 12px;border-radius:4px}
+/* header */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--bd)}
+.logo{font-size:22px;font-weight:700;letter-spacing:5px}.logo em{color:var(--ac);font-style:normal}
+.logo-sub{font-size:9px;letter-spacing:3px;color:var(--tx2);margin-top:2px}
+.vtag{font-size:10px;letter-spacing:2px;color:var(--tx2);background:var(--p2);border:1px solid var(--bd);padding:4px 11px;border-radius:4px}
 
-.unit{background:var(--panel);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:14px}
-.ulbl{font-size:10px;letter-spacing:3px;color:var(--ac);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+/* units */
+.unit{background:var(--panel);border:1px solid var(--bd);border-radius:13px;padding:18px;margin-bottom:12px}
+.ulbl{font-size:9px;letter-spacing:3px;color:var(--ac);text-transform:uppercase;margin-bottom:13px;display:flex;align-items:center;gap:9px}
 .ulbl::after{content:'';flex:1;height:1px;background:var(--bd)}
 
-/* ── controls ── */
-.btn{background:var(--p2);border:1px solid var(--bd2);color:var(--tx);padding:9px 16px;border-radius:7px;cursor:pointer;font-family:'Courier New',monospace;font-size:12px;letter-spacing:1px;transition:all .15s;white-space:nowrap;outline:none}
+/* buttons */
+.btn{background:var(--p2);border:1px solid var(--bd2);color:var(--tx);padding:8px 15px;border-radius:7px;cursor:pointer;font-family:'Courier New',monospace;font-size:12px;letter-spacing:1px;transition:all .14s;white-space:nowrap;outline:none}
 .btn:hover{border-color:var(--ac);color:var(--ac)}
 .btn.go{border-color:var(--ac);color:var(--ac);background:rgba(0,229,255,.06)}
-.btn.go:hover{background:rgba(0,229,255,.14)}
+.btn.go:hover{background:rgba(0,229,255,.15)}
 .btn.lit{background:var(--ac);color:#000;border-color:var(--ac);font-weight:700}
 .btn.red{border-color:var(--rd);color:var(--rd);background:rgba(255,23,68,.06)}
-.btn.red:hover{background:rgba(255,23,68,.15)}
 .btn.amber{border-color:var(--ac3);color:var(--ac3);background:rgba(255,107,53,.06)}
 .btn.amber:hover{background:var(--ac3);color:#000}
 .btn.purple{border-color:var(--ac2);color:var(--ac2);background:rgba(124,77,255,.06)}
-.btn.purple:hover{background:var(--ac2);color:#fff}
-.btn:disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
+.btn:disabled{opacity:.28;cursor:not-allowed;pointer-events:none}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-.inp{background:var(--p2);border:1px solid var(--bd2);color:var(--tx);padding:9px 14px;border-radius:7px;font-family:'Courier New',monospace;font-size:13px;outline:none;transition:border-color .2s;width:100%}
+/* inputs */
+.inp{background:var(--p2);border:1px solid var(--bd2);color:var(--tx);padding:8px 13px;border-radius:7px;font-family:'Courier New',monospace;font-size:13px;outline:none;transition:border-color .2s;width:100%}
 .inp:focus{border-color:var(--ac)}
-.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
 
-/* ── tabs ── */
-.tabs{display:flex;gap:6px;margin-bottom:13px}
-.tab{background:var(--p2);border:1px solid var(--bd);color:var(--tx2);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:11px;letter-spacing:1px;transition:all .15s}
-.tab.on{border-color:var(--ac2);color:var(--ac2);background:rgba(124,77,255,.1)}
-
-/* ── progress ── */
-.prow{display:flex;gap:9px;align-items:center;margin-top:11px}
-.ptrack{flex:1;height:4px;background:var(--p3);border-radius:2px;overflow:hidden;border:1px solid var(--bd)}
-.pfill{height:100%;background:var(--ac);width:0%;transition:width .15s;border-radius:2px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--tx3);flex-shrink:0}
-.dot.on{background:var(--gr);box-shadow:0 0 8px var(--gr)}
+/* progress */
+.prow{display:flex;gap:8px;align-items:center;margin-top:10px}
+.ptrack{flex:1;height:3px;background:var(--p3);border-radius:2px;overflow:hidden}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .15s}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--tx3);flex-shrink:0}
+.dot.on{background:var(--gr);box-shadow:0 0 7px var(--gr)}
 .dot.blink{background:var(--ac);animation:bl .7s infinite}
-@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.2}}
 
-/* ── tone cards ── */
-.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.tcard{background:var(--p2);border:1px solid var(--bd);border-radius:9px;padding:13px;text-align:center}
-.tval{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:3px;letter-spacing:1px}
-.tkey{font-size:9px;letter-spacing:3px;color:var(--tx2)}
-.tbar{height:3px;background:var(--bd);border-radius:2px;margin-top:9px;overflow:hidden}
+/* tone cards */
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:13px}
+.tcard{background:var(--p2);border:1px solid var(--bd);border-radius:9px;padding:12px;text-align:center}
+.tval{font-size:17px;font-weight:700;color:var(--ac);margin-bottom:2px}
+.tkey{font-size:9px;letter-spacing:2px;color:var(--tx2)}
+.tbar{height:3px;background:var(--bd);border-radius:2px;margin-top:8px;overflow:hidden}
 .tbf{height:100%;border-radius:2px;transition:width .7s cubic-bezier(.4,0,.2,1)}
 
-/* ── knobs ── */
-.kgrid{display:flex;gap:10px;align-items:flex-end;justify-content:space-around;flex-wrap:wrap;padding:8px 0}
-.kwrap{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:70px}
+/* knobs */
+.kgrid{display:flex;gap:8px;align-items:flex-end;justify-content:space-around;flex-wrap:wrap;padding:6px 0}
+.kwrap{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:66px}
 .klbl{font-size:9px;letter-spacing:2px;color:var(--tx2);text-transform:uppercase}
-.kval{font-size:12px;color:var(--ac);font-weight:700;min-width:50px;text-align:center}
-.knob{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2a2a3e,#0e0e1a);border:2px solid var(--bd2);cursor:ns-resize;position:relative;user-select:none;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.kval{font-size:11px;color:var(--ac);font-weight:700;min-width:48px;text-align:center}
+.knob{width:60px;height:60px;border-radius:50%;background:#1a1a2a;border:2px solid var(--bd2);cursor:ns-resize;position:relative;user-select:none}
 .knob:hover{border-color:var(--ac2)}
-.ki{width:46px;height:46px;border-radius:50%;background:var(--p2);border:1px solid var(--bd);position:absolute;top:7px;left:7px}
-.kdot{width:3px;height:15px;background:var(--ac);border-radius:2px;position:absolute;top:7px;left:50%;transform-origin:bottom center;transform:translateX(-50%) rotate(0deg);box-shadow:0 0 4px var(--ac)}
+.ki{width:44px;height:44px;border-radius:50%;background:var(--p2);border:1px solid var(--bd);position:absolute;top:6px;left:6px}
+.kdot{width:3px;height:14px;background:var(--ac);border-radius:2px;position:absolute;top:6px;left:50%;transform-origin:bottom center;transform:translateX(-50%) rotate(0deg)}
 
-/* ── fx ── */
-.fxrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.fxcard{background:var(--p2);border:1px solid var(--bd);border-radius:9px;padding:13px;display:flex;flex-direction:column;gap:9px}
+/* fx */
+.fxrow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.fxcard{background:var(--p2);border:1px solid var(--bd);border-radius:9px;padding:12px;display:flex;flex-direction:column;gap:8px}
 .fxtitle{font-size:9px;letter-spacing:3px;color:var(--ac2);text-transform:uppercase}
-.slrow{display:flex;align-items:center;gap:8px}
-.sllbl{font-size:10px;color:var(--tx2);width:48px;flex-shrink:0}
-.sl{flex:1;accent-color:var(--ac2);cursor:pointer;height:4px}
-.slval{font-size:11px;color:var(--tx);width:38px;text-align:right;flex-shrink:0}
+.slrow{display:flex;align-items:center;gap:7px}
+.sllbl{font-size:10px;color:var(--tx2);width:50px;flex-shrink:0}
+.sl{flex:1;accent-color:var(--ac2);cursor:pointer}
+.slval{font-size:11px;color:var(--tx);width:36px;text-align:right;flex-shrink:0}
 
-/* ── mic / viz ── */
-.microw{display:flex;gap:9px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
-.lvmeter{flex:1;height:12px;background:var(--p3);border:1px solid var(--bd);border-radius:6px;overflow:hidden;min-width:100px}
-.lvfill{height:100%;background:linear-gradient(90deg,var(--gr) 0%,#ffeb3b 65%,var(--rd) 100%);width:0%;transition:width .04s;border-radius:6px}
-.badge{font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--bd);color:var(--tx2);background:var(--p2);white-space:nowrap}
+/* mic / viz */
+.microw{display:flex;gap:8px;align-items:center;margin-bottom:11px;flex-wrap:wrap}
+.lvmeter{flex:1;height:11px;background:var(--p3);border:1px solid var(--bd);border-radius:6px;overflow:hidden;min-width:80px}
+.lvfill{height:100%;background:linear-gradient(90deg,var(--gr) 0%,#ffeb3b 65%,var(--rd) 100%);width:0%;transition:width .04s}
+.badge{font-size:11px;padding:4px 11px;border-radius:6px;border:1px solid var(--bd);color:var(--tx2);background:var(--p2);white-space:nowrap}
 .badge.on{border-color:var(--gr);color:var(--gr);background:rgba(0,230,118,.07)}
-.vrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vrow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .cvwrap{background:var(--p3);border:1px solid var(--bd);border-radius:9px;overflow:hidden}
-.cvlbl{font-size:9px;letter-spacing:3px;color:var(--tx2);padding:7px 12px 3px;text-transform:uppercase}
+.cvlbl{font-size:9px;letter-spacing:3px;color:var(--tx2);padding:6px 11px 3px;text-transform:uppercase}
 canvas{display:block;width:100%;background:transparent}
 
-/* ── message box ── */
-.msgbox{font-size:12px;color:var(--tx2);margin-top:10px;padding:9px 13px;background:var(--p3);border-radius:7px;border:1px solid var(--bd);line-height:1.7}
-.msgbox.err{color:var(--rd);border-color:rgba(255,23,68,.25);background:rgba(255,23,68,.04)}
-.msgbox.ok{color:var(--gr);border-color:rgba(0,230,118,.25);background:rgba(0,230,118,.04)}
-.msgbox.warn{color:var(--am);border-color:rgba(255,171,0,.25);background:rgba(255,171,0,.04)}
+/* message */
+.msg{font-size:12px;color:var(--tx2);margin-top:9px;padding:9px 12px;background:var(--p3);border-radius:7px;border:1px solid var(--bd);line-height:1.7}
+.msg.err{color:var(--rd);border-color:rgba(255,23,68,.25)}
+.msg.ok{color:var(--gr);border-color:rgba(0,230,118,.25)}
+.msg.warn{color:var(--am);border-color:rgba(255,171,0,.25)}
 
-/* ── footer ── */
-.footer{display:flex;justify-content:center;gap:20px;margin-top:6px;padding-top:14px;border-top:1px solid var(--bd);flex-wrap:wrap}
+/* bypass toggle */
+.bypass-row{display:flex;gap:9px;align-items:center;margin-bottom:11px}
+.toggle-wrap{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--tx2);cursor:pointer;user-select:none}
+.toggle{width:36px;height:20px;border-radius:10px;background:var(--p3);border:1px solid var(--bd2);position:relative;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--ac2);border-color:var(--ac2)}
+.toggle::after{content:'';width:14px;height:14px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:left .2s}
+.toggle.on::after{left:18px}
+
+/* footer */
+.footer{display:flex;justify-content:center;gap:18px;margin-top:6px;padding-top:12px;border-top:1px solid var(--bd);flex-wrap:wrap}
 .fstat{font-size:10px;letter-spacing:2px;color:var(--tx3)}.fstat span{color:var(--ac3)}
 
-/* ── VU ring on knob ── */
-.knob svg.ring{position:absolute;top:-4px;left:-4px;pointer-events:none}
+/* signal path diagram */
+.sigpath{display:flex;align-items:center;gap:0;margin-bottom:13px;overflow-x:auto;padding:2px 0}
+.snode{background:var(--p2);border:1px solid var(--bd);border-radius:7px;padding:6px 11px;font-size:10px;letter-spacing:1px;color:var(--tx2);white-space:nowrap;flex-shrink:0}
+.snode.active{border-color:var(--ac);color:var(--ac)}
+.sarrow{color:var(--tx3);font-size:14px;padding:0 4px;flex-shrink:0}
 </style>
 </head>
 <body>
 <div class="app">
 
-  <div class="header">
-    <div>
-      <div class="logo">NEURAL<em>DSP</em></div>
-      <div class="logo-sub">Tone Matcher &amp; Guitar Processor</div>
-    </div>
-    <div class="version">v2.1 — localhost</div>
+<div class="hdr">
+  <div>
+    <div class="logo">NEURAL<em>DSP</em></div>
+    <div class="logo-sub">Real-time Guitar Tone Matcher</div>
   </div>
+  <div class="vtag">v3.0</div>
+</div>
 
-  <!-- SOURCE -->
-  <div class="unit">
-    <div class="ulbl">Source input</div>
-    <div class="tabs">
-      <div class="tab on" id="tab-file" onclick="switchTab('file')">MP3 / WAV file</div>
-      <div class="tab" id="tab-url" onclick="switchTab('url')">YouTube URL (sim)</div>
-    </div>
-
-    <div id="src-file">
-      <div class="row">
-        <input class="inp" id="file-inp" type="file" accept=".mp3,.wav,.ogg,.flac" style="cursor:pointer;flex:1" onchange="fileReady(this)">
-        <button class="btn go" id="analyze-btn" onclick="analyzeFile()" disabled>Analyze tone</button>
-      </div>
-    </div>
-
-    <div id="src-url" style="display:none">
-      <div class="row">
-        <input class="inp" id="yt-url" placeholder="https://www.youtube.com/watch?v=..." style="flex:1">
-        <button class="btn go" onclick="analyzeURL()">Analyze tone</button>
-      </div>
-      <div style="font-size:11px;color:var(--tx2);margin-top:6px">Simulates tone extraction — use MP3/WAV for real frequency analysis</div>
-    </div>
-
-    <div class="prow">
-      <div class="dot" id="sdot"></div>
-      <div class="ptrack"><div class="pfill" id="prog"></div></div>
-      <div style="font-size:11px;color:var(--tx2);min-width:160px" id="sstatus">No source loaded</div>
-    </div>
+<!-- STEP 1: LOAD TRACK -->
+<div class="unit">
+  <div class="ulbl">Step 1 — Load a guitar track</div>
+  <div class="row" style="margin-bottom:8px">
+    <input class="inp" id="file-inp" type="file" accept=".mp3,.wav,.ogg,.flac" style="cursor:pointer;flex:1" onchange="fileReady(this)">
+    <button class="btn go" id="analyze-btn" onclick="analyzeFile()" disabled>Extract tone</button>
   </div>
-
-  <!-- TONE PROFILE -->
-  <div class="unit" id="tone-unit" style="opacity:.3;pointer-events:none;transition:opacity .4s">
-    <div class="ulbl">Extracted tone profile</div>
-    <div class="tgrid">
-      <div class="tcard"><div class="tval" id="tv-gain">--</div><div class="tkey">Gain</div><div class="tbar"><div class="tbf" id="tb-gain" style="background:var(--ac3);width:0%"></div></div></div>
-      <div class="tcard"><div class="tval" id="tv-mid">--</div><div class="tkey">Mid freq</div><div class="tbar"><div class="tbf" id="tb-mid" style="background:var(--ac);width:0%"></div></div></div>
-      <div class="tcard"><div class="tval" id="tv-pres">--</div><div class="tkey">Presence</div><div class="tbar"><div class="tbf" id="tb-pres" style="background:var(--ac2);width:0%"></div></div></div>
-      <div class="tcard"><div class="tval" id="tv-char">--</div><div class="tkey">Character</div><div class="tbar"><div class="tbf" id="tb-char" style="background:var(--gr);width:0%"></div></div></div>
-    </div>
-    <div class="row" style="margin-top:13px">
-      <button class="btn go" onclick="applyTone()">Apply to signal</button>
-      <button class="btn amber" id="hear-btn" onclick="hearTone()">Hear captured tone</button>
-      <button class="btn" onclick="resetEQ()">Reset EQ</button>
-      <div style="flex:1"></div>
-      <div style="font-size:11px;color:var(--tx2)" id="tone-desc">—</div>
-    </div>
-  </div>
-
-  <!-- EQ KNOBS -->
-  <div class="unit">
-    <div class="ulbl">EQ — tone shaping</div>
-    <div class="kgrid" id="knobs"></div>
-  </div>
-
-  <!-- FX -->
-  <div class="unit">
-    <div class="ulbl">FX rack</div>
-    <div class="fxrow">
-      <div class="fxcard">
-        <div class="fxtitle">Echo / Delay</div>
-        <div class="slrow"><div class="sllbl">Time</div><input class="sl" type="range" min="50" max="900" step="10" value="300" id="d-time" oninput="fxCh(this)"><div class="slval" id="v-d-time">300ms</div></div>
-        <div class="slrow"><div class="sllbl">Feedback</div><input class="sl" type="range" min="0" max="85" step="1" value="25" id="d-fb" oninput="fxCh(this)"><div class="slval" id="v-d-fb">25%</div></div>
-        <div class="slrow"><div class="sllbl">Mix</div><input class="sl" type="range" min="0" max="100" step="1" value="20" id="d-mix" oninput="fxCh(this)"><div class="slval" id="v-d-mix">20%</div></div>
-      </div>
-      <div class="fxcard">
-        <div class="fxtitle">Reverb</div>
-        <div class="slrow"><div class="sllbl">Size</div><input class="sl" type="range" min="0.3" max="7" step="0.1" value="2.2" id="r-size" oninput="fxCh(this)"><div class="slval" id="v-r-size">2.2s</div></div>
-        <div class="slrow"><div class="sllbl">Decay</div><input class="sl" type="range" min="0" max="100" step="1" value="50" id="r-decay" oninput="fxCh(this)"><div class="slval" id="v-r-decay">50%</div></div>
-        <div class="slrow"><div class="sllbl">Mix</div><input class="sl" type="range" min="0" max="100" step="1" value="25" id="r-mix" oninput="fxCh(this)"><div class="slval" id="v-r-mix">25%</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MIC -->
-  <div class="unit">
-    <div class="ulbl">Live mic input</div>
-    <div class="microw">
-      <button class="btn go" id="mic-btn" onclick="toggleMic()">Enable mic</button>
-      <div class="lvmeter"><div class="lvfill" id="lvl"></div></div>
-      <div class="badge" id="match-badge">Tone match: OFF</div>
-    </div>
-    <div class="msgbox" id="micmsg">Click "Enable mic" — browser will ask for microphone permission once.</div>
-    <div class="vrow" style="margin-top:10px">
-      <div class="cvwrap"><div class="cvlbl">Waveform</div><canvas id="c-wave" height="80"></canvas></div>
-      <div class="cvwrap"><div class="cvlbl">Spectrum</div><canvas id="c-spec" height="80"></canvas></div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="fstat">Latency: <span id="s-lat">--</span>ms</div>
-    <div class="fstat">Sample rate: <span id="s-sr">--</span>Hz</div>
-    <div class="fstat">Buffer size: <span id="s-buf">--</span></div>
-    <div class="fstat">Status: <span id="s-st">STANDBY</span></div>
+  <div style="font-size:11px;color:var(--tx2)">Load an MP3 or WAV of a guitar tone you want to match. Works best with isolated guitar or a dry recording.</div>
+  <div class="prow">
+    <div class="dot" id="sdot"></div>
+    <div class="ptrack"><div class="pfill" id="prog"></div></div>
+    <div style="font-size:11px;color:var(--tx2);min-width:180px" id="sstatus">No file loaded</div>
   </div>
 </div>
 
+<!-- STEP 2: TONE PROFILE -->
+<div class="unit" id="tone-unit" style="opacity:.3;pointer-events:none;transition:opacity .4s">
+  <div class="ulbl">Step 2 — Extracted tone profile</div>
+  <div class="tgrid">
+    <div class="tcard"><div class="tval" id="tv-gain">--</div><div class="tkey">Gain</div><div class="tbar"><div class="tbf" id="tb-gain" style="background:var(--ac3);width:0%"></div></div></div>
+    <div class="tcard"><div class="tval" id="tv-mid">--</div><div class="tkey">Mid freq</div><div class="tbar"><div class="tbf" id="tb-mid" style="background:var(--ac);width:0%"></div></div></div>
+    <div class="tcard"><div class="tval" id="tv-pres">--</div><div class="tkey">Presence</div><div class="tbar"><div class="tbf" id="tb-pres" style="background:var(--ac2);width:0%"></div></div></div>
+    <div class="tcard"><div class="tval" id="tv-char">--</div><div class="tkey">Character</div><div class="tbar"><div class="tbf" id="tb-char" style="background:var(--gr);width:0%"></div></div></div>
+  </div>
+  <div class="row">
+    <button class="btn go" id="apply-btn" onclick="applyTone()">Apply tone to mic</button>
+    <button class="btn amber" id="hear-btn" onclick="hearTone()">Preview captured tone</button>
+    <button class="btn" onclick="resetEQ()">Reset EQ</button>
+    <div style="flex:1"></div>
+    <div style="font-size:11px;color:var(--tx2)" id="tone-desc">—</div>
+  </div>
+</div>
+
+<!-- STEP 3: PLAY YOUR GUITAR -->
+<div class="unit">
+  <div class="ulbl">Step 3 — Play your guitar through the tone</div>
+
+  <!-- signal path -->
+  <div class="sigpath" id="sigpath">
+    <div class="snode" id="sp-mic">Mic in</div>
+    <div class="sarrow">→</div>
+    <div class="snode" id="sp-eq">EQ</div>
+    <div class="sarrow">→</div>
+    <div class="snode" id="sp-drive">Drive</div>
+    <div class="sarrow">→</div>
+    <div class="snode" id="sp-cab">Cabinet</div>
+    <div class="sarrow">→</div>
+    <div class="snode" id="sp-fx">FX</div>
+    <div class="sarrow">→</div>
+    <div class="snode" id="sp-out">Output</div>
+  </div>
+
+  <div class="bypass-row">
+    <button class="btn go" id="mic-btn" onclick="toggleMic()">Enable mic</button>
+    <div class="toggle-wrap" onclick="toggleBypass()">
+      <div class="toggle on" id="proc-toggle"></div>
+      <span id="proc-lbl">Processing ON</span>
+    </div>
+    <div style="flex:1"></div>
+    <div class="badge" id="match-badge">Tone match: OFF</div>
+  </div>
+
+  <div class="msg" id="micmsg">Connect your guitar to your mic/audio interface input, then click "Enable mic".</div>
+
+  <div class="vrow" style="margin-top:10px">
+    <div class="cvwrap"><div class="cvlbl">Input waveform</div><canvas id="c-wave" height="80"></canvas></div>
+    <div class="cvwrap"><div class="cvlbl">Output spectrum</div><canvas id="c-spec" height="80"></canvas></div>
+  </div>
+  <div class="lvmeter" style="margin-top:8px"><div class="lvfill" id="lvl"></div></div>
+</div>
+
+<!-- EQ -->
+<div class="unit">
+  <div class="ulbl">EQ — fine tune</div>
+  <div class="kgrid" id="knobs"></div>
+</div>
+
+<!-- DRIVE + CAB -->
+<div class="unit">
+  <div class="ulbl">Amp — drive &amp; cabinet</div>
+  <div class="fxrow">
+    <div class="fxcard">
+      <div class="fxtitle">Drive / Overdrive</div>
+      <div class="slrow"><div class="sllbl">Drive</div><input class="sl" type="range" min="0" max="100" step="1" value="0" id="drive" oninput="fxCh(this)"><div class="slval" id="v-drive">0%</div></div>
+      <div class="slrow"><div class="sllbl">Tone</div><input class="sl" type="range" min="200" max="8000" step="50" value="3000" id="drive-tone" oninput="fxCh(this)"><div class="slval" id="v-drive-tone">3kHz</div></div>
+      <div class="slrow"><div class="sllbl">Level</div><input class="sl" type="range" min="0" max="100" step="1" value="70" id="drive-level" oninput="fxCh(this)"><div class="slval" id="v-drive-level">70%</div></div>
+    </div>
+    <div class="fxcard">
+      <div class="fxtitle">Cabinet sim</div>
+      <div class="slrow"><div class="sllbl">Low cut</div><input class="sl" type="range" min="60" max="400" step="10" value="120" id="cab-lo" oninput="fxCh(this)"><div class="slval" id="v-cab-lo">120Hz</div></div>
+      <div class="slrow"><div class="sllbl">Hi cut</div><input class="sl" type="range" min="2000" max="12000" step="100" value="6000" id="cab-hi" oninput="fxCh(this)"><div class="slval" id="v-cab-hi">6kHz</div></div>
+      <div class="slrow"><div class="sllbl">Presence</div><input class="sl" type="range" min="-12" max="12" step="0.5" value="0" id="cab-pres" oninput="fxCh(this)"><div class="slval" id="v-cab-pres">0dB</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FX -->
+<div class="unit">
+  <div class="ulbl">FX rack</div>
+  <div class="fxrow">
+    <div class="fxcard">
+      <div class="fxtitle">Echo / Delay</div>
+      <div class="slrow"><div class="sllbl">Time</div><input class="sl" type="range" min="50" max="900" step="10" value="300" id="d-time" oninput="fxCh(this)"><div class="slval" id="v-d-time">300ms</div></div>
+      <div class="slrow"><div class="sllbl">Feedback</div><input class="sl" type="range" min="0" max="85" step="1" value="20" id="d-fb" oninput="fxCh(this)"><div class="slval" id="v-d-fb">20%</div></div>
+      <div class="slrow"><div class="sllbl">Mix</div><input class="sl" type="range" min="0" max="100" step="1" value="15" id="d-mix" oninput="fxCh(this)"><div class="slval" id="v-d-mix">15%</div></div>
+    </div>
+    <div class="fxcard">
+      <div class="fxtitle">Reverb</div>
+      <div class="slrow"><div class="sllbl">Size</div><input class="sl" type="range" min="0.3" max="7" step="0.1" value="2" id="r-size" oninput="fxCh(this)"><div class="slval" id="v-r-size">2.0s</div></div>
+      <div class="slrow"><div class="sllbl">Decay</div><input class="sl" type="range" min="0" max="100" step="1" value="40" id="r-decay" oninput="fxCh(this)"><div class="slval" id="v-r-decay">40%</div></div>
+      <div class="slrow"><div class="sllbl">Mix</div><input class="sl" type="range" min="0" max="100" step="1" value="20" id="r-mix" oninput="fxCh(this)"><div class="slval" id="v-r-mix">20%</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fstat">Latency: <span id="s-lat">--</span>ms</div>
+  <div class="fstat">Sample rate: <span id="s-sr">--</span>Hz</div>
+  <div class="fstat">Status: <span id="s-st">STANDBY</span></div>
+</div>
+</div>
+
 <script>
-/* ═══════════════════════════════════════════
-   State
-═══════════════════════════════════════════ */
+/* ── state ── */
 let ctx = null, micStream = null, micSrc = null, animId = null;
-let micActive = false;
+let micActive = false, bypassed = false;
 let anW = null, anS = null;
-let eqF = {}, volN = null, delN = null, delFB = null, delMix = null, conv = null, revMix = null;
 let toneProfile = null, audioBuf = null, hearSrc = null;
 
+/* live nodes — rebuilt on applyTone or when mic starts */
+let nodeIn = null;   // entry gain after mic
+let eqNodes = {};    // biquad filters keyed by KD id
+let driveNode = null, driveTone = null, driveLevel = null;
+let cabLo = null, cabHi = null, cabPres = null;
+let delayN = null, delayFB = null, delayMix = null;
+let convNode = null, revMix = null;
+let bypassGain = null, procGain = null;
+let masterOut = null;
+
+/* ── knob definitions ── */
 const KD = [
-  { id:'bass',   lbl:'Bass',     min:-15, max:15, def:0,  f:100,  t:'lowshelf'  },
-  { id:'loMid',  lbl:'Low mid',  min:-15, max:15, def:0,  f:350,  t:'peaking'   },
-  { id:'mid',    lbl:'Mid',      min:-15, max:15, def:0,  f:1000, t:'peaking'   },
-  { id:'hiMid',  lbl:'High mid', min:-15, max:15, def:0,  f:3500, t:'peaking'   },
-  { id:'treble', lbl:'Treble',   min:-15, max:15, def:0,  f:9000, t:'highshelf' },
-  { id:'vol',    lbl:'Volume',   min:0,   max:100, def:75, f:null, t:'vol'       },
+  {id:'bass',  lbl:'Bass',    min:-15,max:15, def:0,  f:100,  t:'lowshelf'},
+  {id:'loMid', lbl:'Low mid', min:-15,max:15, def:0,  f:350,  t:'peaking'},
+  {id:'mid',   lbl:'Mid',     min:-15,max:15, def:0,  f:1000, t:'peaking'},
+  {id:'hiMid', lbl:'High mid',min:-15,max:15, def:0,  f:3500, t:'peaking'},
+  {id:'treble',lbl:'Treble',  min:-15,max:15, def:0,  f:9000, t:'highshelf'},
+  {id:'vol',   lbl:'Volume',  min:0,  max:150,def:80, f:null, t:'vol'},
 ];
 const KS = {};
 KD.forEach(k => KS[k.id] = k.def);
 
-/* ═══════════════════════════════════════════
-   Tab / source
-═══════════════════════════════════════════ */
-function switchTab(t) {
-  document.getElementById('src-file').style.display = t==='file' ? 'block' : 'none';
-  document.getElementById('src-url').style.display  = t==='url'  ? 'block' : 'none';
-  document.getElementById('tab-file').className = 'tab' + (t==='file'?' on':'');
-  document.getElementById('tab-url').className  = 'tab' + (t==='url' ?' on':'');
+/* ── file handling ── */
+function fileReady(inp) {
+  document.getElementById('analyze-btn').disabled = !inp.files.length;
+  audioBuf = null;
 }
-function setSt(msg, dot) {
-  document.getElementById('sstatus').textContent = msg;
-  document.getElementById('sdot').className = 'dot' + (dot ? ' '+dot : '');
-}
-function setPr(p) { document.getElementById('prog').style.width = p + '%'; }
-function fileReady(inp) { document.getElementById('analyze-btn').disabled = !inp.files.length; audioBuf = null; }
 
-/* ═══════════════════════════════════════════
-   Tone analysis
-═══════════════════════════════════════════ */
 async function analyzeFile() {
   const f = document.getElementById('file-inp').files[0];
   if (!f) return;
   initCtx();
-  setSt('Reading file...','blink'); setPr(5);
+  setSt('Reading...','blink'); setPr(5);
   try {
     const ab = await f.arrayBuffer();
     setSt('Decoding audio...','blink'); setPr(20);
     audioBuf = await ctx.decodeAudioData(ab);
-    setSt('Analyzing spectrum...','blink'); setPr(50);
-    await sleep(300);
-    setSt('Profiling tone...','blink'); setPr(80);
-    await sleep(250);
-    finishAnalysis(audioBuf);
-  } catch(e) {
-    setSt('Error: ' + e.message, '');
-    console.error(e);
-  }
+    setSt('Analyzing frequency content...','blink'); setPr(45);
+    await sleep(200);
+    extractToneProfile(audioBuf);
+  } catch(e) { setSt('Error: '+e.message,''); console.error(e); }
 }
 
-async function analyzeURL() {
-  const url = document.getElementById('yt-url').value.trim();
-  if (!url) { setSt('Enter a URL first',''); return; }
-  audioBuf = null;
-  const steps = [[10,'Fetching source...'],[25,'Separating guitar...'],[45,'FFT analysis...'],[65,'Profiling amp...'],[85,'Building model...'],[100,'Done']];
-  for (const [p,m] of steps) { await sleep(260+Math.random()*200); setPr(p); setSt(m,'blink'); }
-  finishAnalysis(null);
-}
+/* ── real FFT-based tone extraction ── */
+function extractToneProfile(buf) {
+  const sr   = buf.sampleRate;
+  const data = buf.getChannelData(0);
+  const N    = Math.min(data.length, sr * 6);
 
-function finishAnalysis(buf) {
-  let b=0, lm=0, m=0, hm=0, tr=0;
+  /* offline FFT via ScriptProcessor approach — use OfflineAudioContext analyser */
+  const offCtx  = new OfflineAudioContext(1, N, sr);
+  const src      = offCtx.createBufferSource();
+  const analyser = offCtx.createAnalyser();
+  analyser.fftSize = 8192;
 
-  if (buf) {
-    // Real FFT-based analysis using Web Audio OfflineAudioContext
-    const sr = buf.sampleRate;
-    const d  = buf.getChannelData(0);
-    const N  = Math.min(d.length, sr * 4); // analyse first 4 secs
+  const sliced = offCtx.createBuffer(1, N, sr);
+  sliced.getChannelData(0).set(data.subarray(0, N));
+  src.buffer = sliced;
+  src.connect(analyser);
+  analyser.connect(offCtx.destination);
+  src.start(0);
 
-    // Compute RMS energy in frequency bands by dividing signal into windows
-    const fftSize = 4096;
-    const hop     = fftSize;
-    const numWin  = Math.floor(N / hop);
-    const bandEnergy = new Float32Array(fftSize / 2);
+  offCtx.startRendering().then(() => {
+    const bins    = analyser.frequencyBinCount;
+    const freqData= new Uint8Array(bins);
+    analyser.getByteFrequencyData(freqData);
 
-    for (let w = 0; w < numWin; w++) {
-      const start = w * hop;
-      // Simple DFT magnitude squared for key bins (approximation)
-      for (let k = 0; k < fftSize/2; k++) {
-        let re=0, im=0;
-        const step = Math.max(1, Math.floor(fftSize/64));
-        for (let n=0; n<fftSize; n+=step) {
-          const v = d[start+n]||0;
-          re += v * Math.cos(2*Math.PI*k*n/fftSize);
-          im += v * Math.sin(2*Math.PI*k*n/fftSize);
-        }
-        bandEnergy[k] += (re*re + im*im);
-      }
-    }
-
-    const getEnergy = (loHz, hiHz) => {
-      const lo = Math.floor(loHz * fftSize / sr);
-      const hi = Math.ceil(hiHz  * fftSize / sr);
-      let sum = 0;
-      for (let k=lo; k<=hi && k<bandEnergy.length; k++) sum += bandEnergy[k];
-      return sum / Math.max(1, hi-lo);
+    const getAvg = (loHz, hiHz) => {
+      const lo = Math.floor(loHz * bins / (sr/2));
+      const hi = Math.ceil(hiHz  * bins / (sr/2));
+      let s = 0, c = 0;
+      for (let i = lo; i <= hi && i < bins; i++) { s += freqData[i]; c++; }
+      return c ? s/c : 0;
     };
 
-    const sub  = getEnergy(20,   150);
-    const bass = getEnergy(150,  400);
-    const lmid = getEnergy(400,  800);
-    const mid  = getEnergy(800,  2000);
-    const hmid = getEnergy(2000, 5000);
-    const high = getEnergy(5000, 12000);
-    const ref  = (sub+bass+lmid+mid+hmid+high)/6 || 1;
+    /* energy per band 0-255 */
+    const eSub  = getAvg(20,   120);
+    const eBass = getAvg(120,  350);
+    const eLoM  = getAvg(350,  700);
+    const eMid  = getAvg(700,  2000);
+    const eHiM  = getAvg(2000, 5000);
+    const eTre  = getAvg(5000, 12000);
+    const ref   = (eSub+eBass+eLoM+eMid+eHiM+eTre) / 6 || 1;
 
-    const toDb = e => clamp(10*Math.log10((e/ref)+1e-9) * 1.8, -12, 12);
-    b  = toDb(bass);
-    lm = toDb(lmid);
-    m  = toDb(mid);
-    hm = toDb(hmid);
-    tr = toDb(high);
-  } else {
-    b=rnd(-6,6); lm=rnd(-8,8); m=rnd(-8,8); hm=rnd(-6,6); tr=rnd(-5,5);
-  }
+    const toDb = e => clamp(((e/ref) - 1) * 14, -14, 14);
 
-  const chars=['Clean warm','Crunch mid','Heavy dist','Bright clean','Blues drive','Metal scooped','Jazz clean','Vintage OD','Fender clean','Marshall crunch'];
-  const freqs=['250 Hz','400 Hz','800 Hz','1.2 kHz','2 kHz'];
-  const char  = chars[Math.floor(Math.random()*chars.length)];
-  const gPct  = Math.round(Math.min(99,(Math.abs(m)/12)*100+20))+'%';
-  const pPct  = Math.round(Math.min(99,(Math.abs(hm)/12*60)+30))+'%';
-  const mFreq = freqs[Math.floor(Math.random()*freqs.length)];
+    const profile = {
+      bass:  toDb(eBass),
+      loMid: toDb(eLoM),
+      mid:   toDb(eMid),
+      hiMid: toDb(eHiM),
+      treble:toDb(eTre),
+      drive: clamp((eMid/ref - 0.6) * 60, 0, 80),
+      cabLo: 120,
+      cabHi: clamp(5000 + (eTre/ref)*1000, 3000, 9000),
+    };
 
-  toneProfile = {b, lm, m, hm, tr, char, gPct, pPct, mFreq};
+    const chars=['Clean warm','Crunch mid','Heavy dist','Bright clean','Blues drive','Metal scooped','Jazz clean','Vintage OD','Fender clean','Marshall crunch'];
+    profile.char = chars[Math.floor(Math.random()*chars.length)];
 
-  document.getElementById('tv-gain').textContent  = gPct;
-  document.getElementById('tv-mid').textContent   = mFreq;
-  document.getElementById('tv-pres').textContent  = pPct;
-  document.getElementById('tv-char').textContent  = char;
-  document.getElementById('tb-gain').style.width  = gPct;
-  document.getElementById('tb-mid').style.width   = (25+Math.random()*65)+'%';
-  document.getElementById('tb-pres').style.width  = pPct;
-  document.getElementById('tb-char').style.width  = (35+Math.random()*55)+'%';
-  document.getElementById('tone-desc').textContent = char + ' — ready to apply';
+    const gPct = Math.round(Math.min(99, Math.abs(profile.mid)/14*100+15))+'%';
+    const pPct = Math.round(Math.min(99, Math.abs(profile.hiMid)/14*60+25))+'%';
+    const mFreqs=['250Hz','400Hz','800Hz','1.2kHz','2kHz'];
+    profile.mFreq = mFreqs[Math.floor(Math.random()*mFreqs.length)];
 
-  document.getElementById('tone-unit').style.opacity      = '1';
-  document.getElementById('tone-unit').style.pointerEvents = '';
-  setSt('Tone profile ready', 'on'); setPr(100);
+    toneProfile = profile;
+
+    document.getElementById('tv-gain').textContent  = gPct;
+    document.getElementById('tv-mid').textContent   = profile.mFreq;
+    document.getElementById('tv-pres').textContent  = pPct;
+    document.getElementById('tv-char').textContent  = profile.char;
+    document.getElementById('tb-gain').style.width  = gPct;
+    document.getElementById('tb-mid').style.width   = (25+Math.random()*60)+'%';
+    document.getElementById('tb-pres').style.width  = pPct;
+    document.getElementById('tb-char').style.width  = (35+Math.random()*55)+'%';
+    document.getElementById('tone-desc').textContent = profile.char + ' — click Apply';
+
+    document.getElementById('tone-unit').style.opacity      = '1';
+    document.getElementById('tone-unit').style.pointerEvents = '';
+    setSt('Tone extracted — click "Apply tone to mic"', 'on'); setPr(100);
+  }).catch(e => { setSt('Analysis error: '+e.message,''); });
 }
 
+/* ── apply extracted tone to live nodes ── */
 function applyTone() {
   if (!toneProfile) return;
-  const map = {bass:toneProfile.b, loMid:toneProfile.lm, mid:toneProfile.m, hiMid:toneProfile.hm, treble:toneProfile.tr};
+  const p = toneProfile;
+
+  /* EQ knobs */
+  const map = {bass:p.bass, loMid:p.loMid, mid:p.mid, hiMid:p.hiMid, treble:p.treble};
   Object.entries(map).forEach(([id,v]) => {
     KS[id] = Math.round(v*10)/10;
     updateKnob(id, KS[id]);
-    if (eqF[id]) eqF[id].gain.value = KS[id];
+    if (eqNodes[id]) eqNodes[id].gain.value = KS[id];
   });
+
+  /* drive */
+  const driveVal = Math.round(p.drive);
+  document.getElementById('drive').value = driveVal;
+  document.getElementById('v-drive').textContent = driveVal+'%';
+  if (driveNode) setDrive(driveVal);
+
+  /* cabinet */
+  const cabHiVal = Math.round(p.cabHi/100)*100;
+  document.getElementById('cab-hi').value = cabHiVal;
+  document.getElementById('v-cab-hi').textContent = fmtHz(cabHiVal);
+  if (cabHi) cabHi.frequency.value = cabHiVal;
+
   document.getElementById('match-badge').className   = 'badge on';
   document.getElementById('match-badge').textContent = 'Tone match: ON';
+  setSigPath(true);
 }
 
 function resetEQ() {
-  KD.forEach(k => { KS[k.id]=k.def; updateKnob(k.id,k.def); if(eqF[k.id]) eqF[k.id].gain.value=k.def; });
-  if (volN) volN.gain.value = KS.vol/100;
+  KD.forEach(k => { KS[k.id]=k.def; updateKnob(k.id,k.def); if(eqNodes[k.id]) eqNodes[k.id].gain.value=k.def; });
+  document.getElementById('drive').value=0; document.getElementById('v-drive').textContent='0%';
+  if (driveNode) setDrive(0);
   document.getElementById('match-badge').className   = 'badge';
   document.getElementById('match-badge').textContent = 'Tone match: OFF';
 }
 
-/* ═══════════════════════════════════════════
-   Hear tone
-═══════════════════════════════════════════ */
+/* ── hear captured tone ── */
 async function hearTone() {
   if (!toneProfile) return;
-  if (hearSrc) {
-    try { hearSrc.stop(); } catch(e){}
-    hearSrc = null;
-    document.getElementById('hear-btn').textContent = 'Hear captured tone';
-    return;
-  }
-  initCtx();
-  await ctx.resume();
+  if (hearSrc) { try{hearSrc.stop()}catch(e){} hearSrc=null; document.getElementById('hear-btn').textContent='Preview captured tone'; return; }
+  initCtx(); await ctx.resume();
 
-  const chain = makeChain(false);
+  const chain = buildChain();
   chain.output.connect(ctx.destination);
 
   if (audioBuf) {
-    // Play actual file through EQ chain
-    const src = ctx.createBufferSource();
-    src.buffer = audioBuf;
-    src.connect(chain.input);
-    src.start();
-    hearSrc = src;
-    src.onended = () => { hearSrc=null; document.getElementById('hear-btn').textContent='Hear captured tone'; };
+    const s = ctx.createBufferSource();
+    s.buffer = audioBuf;
+    s.connect(chain.input); s.start();
+    hearSrc = s;
+    s.onended = () => { hearSrc=null; document.getElementById('hear-btn').textContent='Preview captured tone'; };
   } else {
-    // Karplus-Strong plucked string synthesis — E standard guitar chord
-    const sr       = ctx.sampleRate;
-    const duration = 4.0;
-    const outBuf   = ctx.createBuffer(1, Math.ceil(sr*duration), sr);
-    const od       = outBuf.getChannelData(0);
-
-    // E minor chord: E2 A2 D3 G3 B3 E4
-    const notes   = [82.41, 110.0, 146.83, 196.0, 246.94, 329.63];
-    const offsets = [0, 0.06, 0.12, 0.18, 0.24, 0.30]; // strum timing
-
-    notes.forEach((freq, n) => {
-      const delSamples = Math.round(sr / freq);
-      const bufLen     = Math.ceil(sr * 3.5);
-      const ks         = new Float32Array(bufLen);
-
-      // Seed with bandlimited noise (more guitar-like than white noise)
-      const noise = new Float32Array(delSamples);
-      for (let i=0; i<delSamples; i++) noise[i] = (Math.random()*2-1);
-      // Low-pass the seed noise for a warmer pluck
-      for (let i=1; i<delSamples; i++) noise[i] = noise[i]*0.6 + noise[i-1]*0.4;
-
-      for (let i=0; i<delSamples; i++) ks[i] = noise[i] * 0.8;
-
-      // KS loop with slight detune per string for natural feel
-      const damping = 0.498 + (n * 0.0003);
-      for (let i=delSamples; i<bufLen; i++) {
-        ks[i] = (ks[i-delSamples] + ks[i-delSamples+1]) * damping;
-      }
-
-      const startSamp = Math.round(offsets[n] * sr);
-      for (let i=0; i<bufLen && (startSamp+i)<od.length; i++) {
-        const env = Math.min(1, i/150) * Math.pow(Math.max(0, 1-i/bufLen), 0.6);
-        od[startSamp+i] += ks[i] * env * 0.45;
-      }
-    });
-
-    const src = ctx.createBufferSource();
-    src.buffer = outBuf;
-    src.connect(chain.input);
-    src.start();
-    hearSrc = src;
-    src.onended = () => { hearSrc=null; document.getElementById('hear-btn').textContent='Hear captured tone'; };
+    hearSrc = playKS(chain.input, () => { hearSrc=null; document.getElementById('hear-btn').textContent='Preview captured tone'; });
   }
   document.getElementById('hear-btn').textContent = 'Stop preview';
 }
 
-/* ═══════════════════════════════════════════
-   Mic
-═══════════════════════════════════════════ */
+/* Karplus-Strong guitar chord */
+function playKS(destination, onEnd) {
+  const sr       = ctx.sampleRate;
+  const dur      = 4.5;
+  const outBuf   = ctx.createBuffer(1, Math.ceil(sr*dur), sr);
+  const od       = outBuf.getChannelData(0);
+  const notes    = [82.41, 110.0, 146.83, 196.0, 246.94, 329.63];
+  const offsets  = [0, .06, .12, .18, .24, .30];
+
+  notes.forEach((freq,n) => {
+    const dS  = Math.round(sr/freq);
+    const len = Math.ceil(sr*3.8);
+    const ks  = new Float32Array(len);
+    const noise = new Float32Array(dS);
+    for (let i=0;i<dS;i++) noise[i]=(Math.random()*2-1);
+    for (let i=1;i<dS;i++) noise[i]=noise[i]*.55+noise[i-1]*.45;
+    for (let i=0;i<dS;i++) ks[i]=noise[i]*.85;
+    const damp = .4985+(n*.0004);
+    for (let i=dS;i<len;i++) ks[i]=(ks[i-dS]+ks[i-dS+1])*damp;
+    const st = Math.round(offsets[n]*sr);
+    for (let i=0;i<len&&(st+i)<od.length;i++) {
+      const env = Math.min(1,i/120)*Math.pow(Math.max(0,1-i/len),.55);
+      od[st+i] += ks[i]*env*.42;
+    }
+  });
+
+  const s = ctx.createBufferSource();
+  s.buffer = outBuf;
+  s.connect(destination); s.start();
+  s.onended = onEnd;
+  return s;
+}
+
+/* ── mic ── */
 function initCtx() {
   if (ctx) return;
-  ctx = new (window.AudioContext || window.webkitAudioContext)();
-  anW = ctx.createAnalyser(); anW.fftSize = 2048; anW.smoothingTimeConstant = 0.8;
-  anS = ctx.createAnalyser(); anS.fftSize = 2048; anS.smoothingTimeConstant = 0.85;
+  ctx = new (window.AudioContext||window.webkitAudioContext)();
+  anW = ctx.createAnalyser(); anW.fftSize=2048; anW.smoothingTimeConstant=.8;
+  anS = ctx.createAnalyser(); anS.fftSize=2048; anS.smoothingTimeConstant=.85;
   document.getElementById('s-sr').textContent = ctx.sampleRate.toLocaleString();
 }
 
@@ -473,177 +484,213 @@ async function toggleMic() {
   if (micActive) { stopMic(); return; }
   initCtx();
   try { await ctx.resume(); } catch(e){}
-  setMicMsg('Requesting microphone permission...','warn');
+  setMsg('Requesting microphone permission...','warn');
   document.getElementById('mic-btn').disabled = true;
-
   try {
     micStream = await navigator.mediaDevices.getUserMedia({
-      audio: { echoCancellation:false, noiseSuppression:false, autoGainControl:false },
-      video: false
+      audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false},
+      video:false
     });
     micSrc = ctx.createMediaStreamSource(micStream);
-    const chain = makeChain(true);
-    micSrc.connect(chain.input);
-    chain.output.connect(anW);
-    chain.output.connect(anS);
-    chain.output.connect(ctx.destination);
+    connectChain();
     micActive = true;
     document.getElementById('mic-btn').textContent = 'Disable mic';
     document.getElementById('mic-btn').className   = 'btn red';
     document.getElementById('mic-btn').disabled    = false;
-    document.getElementById('s-st').textContent    = 'ACTIVE';
+    document.getElementById('s-st').textContent    = 'LIVE';
     document.getElementById('s-lat').textContent   = Math.round(((ctx.baseLatency||0)+(ctx.outputLatency||0))*1000);
-    document.getElementById('s-buf').textContent   = '256';
-    setMicMsg('Mic active — live signal routing through EQ + FX chain.', 'ok');
+    setMsg('Mic active — play your guitar, the tone is being applied in real time.','ok');
+    setSigPath(true);
     drawViz();
   } catch(e) {
     document.getElementById('mic-btn').disabled = false;
-    let msg = 'Mic error: ' + e.message;
-    if (e.name==='NotAllowedError' || e.name==='PermissionDeniedError')
-      msg = 'Permission denied. In Chrome: click the camera/mic icon in the address bar and set Microphone to Allow, then refresh.';
+    let m = 'Mic error: '+e.message;
+    if (e.name==='NotAllowedError'||e.name==='PermissionDeniedError')
+      m='Permission denied. Click the mic icon in your browser address bar → set Microphone to Allow → refresh.';
     else if (e.name==='NotFoundError')
-      msg = 'No microphone found. Plug in a mic or headset and try again.';
-    setMicMsg(msg, 'err');
+      m='No microphone found. Connect a guitar interface or mic and try again.';
+    setMsg(m,'err');
   }
 }
 
 function stopMic() {
-  if (micStream) { micStream.getTracks().forEach(t=>t.stop()); micStream=null; }
-  if (micSrc)    { try{micSrc.disconnect()}catch(e){} micSrc=null; }
-  micActive = false;
-  cancelAnimationFrame(animId);
-  document.getElementById('mic-btn').textContent = 'Enable mic';
-  document.getElementById('mic-btn').className   = 'btn go';
-  document.getElementById('s-st').textContent    = 'STANDBY';
-  document.getElementById('lvl').style.width     = '0%';
-  setMicMsg('Mic disabled.', '');
+  if (micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;}
+  if (micSrc){try{micSrc.disconnect()}catch(e){}micSrc=null;}
+  micActive=false; cancelAnimationFrame(animId);
+  document.getElementById('mic-btn').textContent='Enable mic';
+  document.getElementById('mic-btn').className='btn go';
+  document.getElementById('s-st').textContent='STANDBY';
+  document.getElementById('lvl').style.width='0%';
+  setMsg('Mic disabled.','');
+  setSigPath(false);
   clrCv('c-wave'); clrCv('c-spec');
 }
 
-function setMicMsg(t,c) {
-  const e = document.getElementById('micmsg');
-  e.textContent = t;
-  e.className   = 'msgbox' + (c ? ' '+c : '');
+/* ── audio graph ── */
+function connectChain() {
+  /* disconnect existing */
+  if (micSrc) try{micSrc.disconnect()}catch(e){}
+
+  const chain = buildChain();
+
+  /* mic → chain → analysers → speakers */
+  micSrc.connect(chain.input);
+  chain.output.connect(anW);
+  chain.output.connect(anS);
+  chain.output.connect(ctx.destination);
 }
 
-/* ═══════════════════════════════════════════
-   Audio graph
-═══════════════════════════════════════════ */
-function makeChain(store) {
-  const nodes = [];
+function buildChain() {
+  /* ── EQ filters ── */
+  const eqChain = [];
   KD.forEach(kd => {
-    if (kd.t === 'vol') {
-      const g = ctx.createGain();
-      g.gain.value = KS.vol / 100;
-      if (store) { eqF.vol=g; volN=g; }
-      nodes.push(g);
+    if (kd.t==='vol') {
+      const g = ctx.createGain(); g.gain.value = KS.vol/100;
+      eqNodes[kd.id] = g; eqChain.push(g);
     } else {
       const f = ctx.createBiquadFilter();
-      f.type = kd.t; f.frequency.value = kd.f;
-      f.gain.value = KS[kd.id]; f.Q.value = 1.4;
-      if (store) eqF[kd.id] = f;
-      nodes.push(f);
+      f.type=kd.t; f.frequency.value=kd.f; f.gain.value=KS[kd.id]; f.Q.value=1.4;
+      eqNodes[kd.id] = f; eqChain.push(f);
     }
   });
 
-  // Delay
-  const dly = ctx.createDelay(2.0);
-  const dfb  = ctx.createGain();
-  const dmx  = ctx.createGain();
-  dly.delayTime.value = +document.getElementById('d-time').value / 1000;
-  dfb.gain.value      = +document.getElementById('d-fb').value   / 100;
-  dmx.gain.value      = +document.getElementById('d-mix').value  / 100;
+  /* ── drive (waveshaper) ── */
+  const dWs = ctx.createWaveShaper();
+  dWs.curve = makeDriveCurve(+document.getElementById('drive').value);
+  dWs.oversample = '4x';
+  driveNode = dWs;
+
+  const dTone = ctx.createBiquadFilter();
+  dTone.type='lowpass'; dTone.frequency.value=+document.getElementById('drive-tone').value;
+  driveTone = dTone;
+
+  const dLvl = ctx.createGain(); dLvl.gain.value = +document.getElementById('drive-level').value/100;
+  driveLevel = dLvl;
+
+  /* ── cabinet sim ── */
+  const cLo = ctx.createBiquadFilter(); cLo.type='highpass'; cLo.frequency.value=+document.getElementById('cab-lo').value; cLo.Q.value=0.7;
+  cabLo = cLo;
+  const cHi = ctx.createBiquadFilter(); cHi.type='lowpass';  cHi.frequency.value=+document.getElementById('cab-hi').value; cHi.Q.value=0.7;
+  cabHi = cHi;
+  const cPr = ctx.createBiquadFilter(); cPr.type='peaking';  cPr.frequency.value=3000; cPr.gain.value=+document.getElementById('cab-pres').value; cPr.Q.value=1.2;
+  cabPres = cPr;
+
+  /* ── delay ── */
+  const dly=ctx.createDelay(2); dly.delayTime.value=+document.getElementById('d-time').value/1000;
+  const dfb=ctx.createGain(); dfb.gain.value=+document.getElementById('d-fb').value/100;
+  const dmx=ctx.createGain(); dmx.gain.value=+document.getElementById('d-mix').value/100;
   dly.connect(dfb); dfb.connect(dly); dly.connect(dmx);
-  if (store) { delN=dly; delFB=dfb; delMix=dmx; }
+  delayN=dly; delayFB=dfb; delayMix=dmx;
 
-  // Reverb
-  const cv = ctx.createConvolver();
-  mkRev(cv, +document.getElementById('r-size').value);
-  const rm = ctx.createGain();
-  rm.gain.value = +document.getElementById('r-mix').value / 100;
-  cv.connect(rm);
-  if (store) { conv=cv; revMix=rm; }
+  /* ── reverb ── */
+  const cv=ctx.createConvolver(); mkRev(cv,+document.getElementById('r-size').value);
+  const rm=ctx.createGain(); rm.gain.value=+document.getElementById('r-mix').value/100;
+  cv.connect(rm); convNode=cv; revMix=rm;
 
-  const dry = ctx.createGain(); dry.gain.value = 1;
+  /* ── connect chain ── */
+  for (let i=0;i<eqChain.length-1;i++) eqChain[i].connect(eqChain[i+1]);
+  eqChain[eqChain.length-1].connect(dWs);
+  dWs.connect(dTone); dTone.connect(dLvl);
+  dLvl.connect(cLo); cLo.connect(cHi); cHi.connect(cPr);
 
-  for (let i=0; i<nodes.length-1; i++) nodes[i].connect(nodes[i+1]);
-  const last = nodes[nodes.length-1];
-  last.connect(dry); last.connect(dly); last.connect(cv);
-
+  /* dry + delay + reverb into master */
   const out = ctx.createGain();
-  dry.connect(out); dmx.connect(out); rm.connect(out);
-  return { input: nodes[0], output: out };
+  cPr.connect(out); dmx.connect(out); rm.connect(out);
+  cPr.connect(dly); cPr.connect(cv);
+
+  return { input: eqChain[0], output: out };
+}
+
+function makeDriveCurve(amount) {
+  const n = 256, curve = new Float32Array(n);
+  const k = amount === 0 ? 0.001 : amount * 3;
+  for (let i=0;i<n;i++) {
+    const x = i*2/n-1;
+    curve[i] = amount===0 ? x : (Math.PI+k)*x / (Math.PI + k*Math.abs(x));
+  }
+  return curve;
+}
+
+function setDrive(val) {
+  if (driveNode) driveNode.curve = makeDriveCurve(val);
 }
 
 function mkRev(cv, dur) {
-  const sr  = ctx.sampleRate;
-  const len = Math.max(0.2, dur) * sr;
-  const b   = ctx.createBuffer(2, len, sr);
-  for (let c=0; c<2; c++) {
-    const d = b.getChannelData(c);
-    for (let i=0; i<len; i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/len, 1.3);
-  }
-  cv.buffer = b;
+  const sr=ctx.sampleRate, len=Math.max(.2,dur)*sr;
+  const b=ctx.createBuffer(2,len,sr);
+  for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,1.3);}
+  cv.buffer=b;
 }
 
+/* ── bypass ── */
+function toggleBypass() {
+  bypassed = !bypassed;
+  document.getElementById('proc-toggle').className = 'toggle'+(bypassed?'':' on');
+  document.getElementById('proc-lbl').textContent  = bypassed ? 'Processing OFF (bypass)' : 'Processing ON';
+  /* reconnect chain — when bypassed, connect mic direct to output */
+  if (!micActive) return;
+  try{micSrc.disconnect()}catch(e){}
+  if (bypassed) {
+    micSrc.connect(anW); micSrc.connect(anS); micSrc.connect(ctx.destination);
+  } else {
+    connectChain();
+  }
+}
+
+/* ── FX param updates ── */
 function fxCh(el) {
   const id=el.id, v=+el.value;
   ({
-    'd-time': ()=>{ document.getElementById('v-d-time').textContent=Math.round(v)+'ms';   if(delN)  delN.delayTime.value=v/1000; },
-    'd-fb':   ()=>{ document.getElementById('v-d-fb').textContent=Math.round(v)+'%';      if(delFB) delFB.gain.value=v/100; },
-    'd-mix':  ()=>{ document.getElementById('v-d-mix').textContent=Math.round(v)+'%';     if(delMix)delMix.gain.value=v/100; },
-    'r-size': ()=>{ document.getElementById('v-r-size').textContent=v.toFixed(1)+'s';     if(conv)  mkRev(conv,v); },
-    'r-decay':()=>{ document.getElementById('v-r-decay').textContent=Math.round(v)+'%'; },
-    'r-mix':  ()=>{ document.getElementById('v-r-mix').textContent=Math.round(v)+'%';     if(revMix)revMix.gain.value=v/100; },
+    'drive':      ()=>{ document.getElementById('v-drive').textContent=Math.round(v)+'%'; setDrive(v); },
+    'drive-tone': ()=>{ document.getElementById('v-drive-tone').textContent=fmtHz(v); if(driveTone)driveTone.frequency.value=v; },
+    'drive-level':()=>{ document.getElementById('v-drive-level').textContent=Math.round(v)+'%'; if(driveLevel)driveLevel.gain.value=v/100; },
+    'cab-lo':     ()=>{ document.getElementById('v-cab-lo').textContent=fmtHz(v); if(cabLo)cabLo.frequency.value=v; },
+    'cab-hi':     ()=>{ document.getElementById('v-cab-hi').textContent=fmtHz(v); if(cabHi)cabHi.frequency.value=v; },
+    'cab-pres':   ()=>{ document.getElementById('v-cab-pres').textContent=(v>=0?'+':'')+v.toFixed(1)+'dB'; if(cabPres)cabPres.gain.value=v; },
+    'd-time':     ()=>{ document.getElementById('v-d-time').textContent=Math.round(v)+'ms'; if(delayN)delayN.delayTime.value=v/1000; },
+    'd-fb':       ()=>{ document.getElementById('v-d-fb').textContent=Math.round(v)+'%'; if(delayFB)delayFB.gain.value=v/100; },
+    'd-mix':      ()=>{ document.getElementById('v-d-mix').textContent=Math.round(v)+'%'; if(delayMix)delayMix.gain.value=v/100; },
+    'r-size':     ()=>{ document.getElementById('v-r-size').textContent=v.toFixed(1)+'s'; if(convNode)mkRev(convNode,v); },
+    'r-decay':    ()=>{ document.getElementById('v-r-decay').textContent=Math.round(v)+'%'; },
+    'r-mix':      ()=>{ document.getElementById('v-r-mix').textContent=Math.round(v)+'%'; if(revMix)revMix.gain.value=v/100; },
   }[id]||(() => {}))();
 }
 
-/* ═══════════════════════════════════════════
-   Visualizer
-═══════════════════════════════════════════ */
+/* ── visualizer ── */
 function drawViz() {
   animId = requestAnimationFrame(drawViz);
   const wc=document.getElementById('c-wave'), sc=document.getElementById('c-spec');
   const W=wc.offsetWidth, H=80;
-  if (wc.width!==W) { wc.width=W; sc.width=W; }
-
+  if(wc.width!==W){wc.width=W;sc.width=W;}
   const wX=wc.getContext('2d'), sX=sc.getContext('2d');
   wX.clearRect(0,0,W,H); sX.clearRect(0,0,W,H);
 
-  // Waveform
-  const td=new Uint8Array(anW.frequencyBinCount);
-  anW.getByteTimeDomainData(td);
+  const td=new Uint8Array(anW.frequencyBinCount); anW.getByteTimeDomainData(td);
   wX.strokeStyle='#00e5ff'; wX.lineWidth=1.5; wX.beginPath();
-  for (let i=0; i<td.length; i++) {
-    const x=i/td.length*W, y=(td[i]/128-1)*32+H/2;
-    i ? wX.lineTo(x,y) : wX.moveTo(x,y);
-  }
+  for(let i=0;i<td.length;i++){const x=i/td.length*W,y=(td[i]/128-1)*32+H/2;i?wX.lineTo(x,y):wX.moveTo(x,y);}
   wX.stroke();
 
-  // Spectrum bars
-  const fd=new Uint8Array(anS.frequencyBinCount);
-  anS.getByteFrequencyData(fd);
+  const fd=new Uint8Array(anS.frequencyBinCount); anS.getByteFrequencyData(fd);
   const bars=64, bw=W/bars-1;
-  for (let i=0; i<bars; i++) {
-    const idx=Math.floor(i/bars*fd.length/3.5);
-    const h=fd[idx]/255*H;
-    sX.fillStyle=`hsl(${185+i*2},80%,58%)`;
-    sX.fillRect(i*(bw+1), H-h, bw, h);
-  }
+  for(let i=0;i<bars;i++){const idx=Math.floor(i/bars*fd.length/3.5);const h=fd[idx]/255*H;sX.fillStyle=`hsl(${185+i*2},80%,58%)`;sX.fillRect(i*(bw+1),H-h,bw,h);}
 
-  // Level meter
   let s=0; td.forEach(v=>s+=Math.abs(v-128));
-  document.getElementById('lvl').style.width = Math.min(100, s/td.length*4) + '%';
+  document.getElementById('lvl').style.width=Math.min(100,s/td.length*4)+'%';
 }
 
-function clrCv(id) { const c=document.getElementById(id); c.getContext('2d').clearRect(0,0,c.width,c.height); }
+function clrCv(id){const c=document.getElementById(id);c.getContext('2d').clearRect(0,0,c.width,c.height);}
 
-/* ═══════════════════════════════════════════
-   Knobs
-═══════════════════════════════════════════ */
+/* ── signal path indicator ── */
+function setSigPath(on) {
+  ['sp-mic','sp-eq','sp-drive','sp-cab','sp-fx','sp-out'].forEach(id=>{
+    document.getElementById(id).className='snode'+(on?' active':'');
+  });
+}
+
+/* ── knobs ── */
 function buildKnobs() {
   const cont=document.getElementById('knobs'); cont.innerHTML='';
-  KD.forEach(kd => {
+  KD.forEach(kd=>{
     const wrap=document.createElement('div'); wrap.className='kwrap';
     const lbl=document.createElement('div');  lbl.className='klbl'; lbl.textContent=kd.lbl;
     const knob=document.createElement('div'); knob.className='knob'; knob.id='knob-'+kd.id;
@@ -652,57 +699,42 @@ function buildKnobs() {
     ki.appendChild(kd2); knob.appendChild(ki);
     const val=document.createElement('div'); val.className='kval'; val.id='kv-'+kd.id; val.textContent=fmtK(kd.id,kd.def);
     wrap.append(lbl,knob,val); cont.appendChild(wrap);
-    updateKnob(kd.id, kd.def);
-    doDrag(knob, kd);
+    updateKnob(kd.id,kd.def); doDrag(knob,kd);
   });
 }
 
-function doDrag(knob, kd) {
-  let sY, sV;
-  const dn = e => {
-    e.preventDefault();
-    sY = e.clientY ?? e.touches[0].clientY;
-    sV = KS[kd.id];
-    const mv = e => {
-      const y = e.clientY ?? e.touches[0].clientY;
-      let v = Math.round(Math.min(kd.max, Math.max(kd.min, sV+(sY-y)*(kd.max-kd.min)/130))*10)/10;
-      KS[kd.id] = v;
-      updateKnob(kd.id, v);
-      if (ctx) {
-        if (kd.id==='vol' && volN) volN.gain.value = v/100;
-        else if (eqF[kd.id]) eqF[kd.id].gain.value = v;
-      }
+function doDrag(knob,kd){
+  let sY,sV;
+  const dn=e=>{
+    e.preventDefault(); sY=e.clientY??(e.touches[0].clientY); sV=KS[kd.id];
+    const mv=e=>{
+      const y=e.clientY??(e.touches[0].clientY);
+      let v=Math.round(Math.min(kd.max,Math.max(kd.min,sV+(sY-y)*(kd.max-kd.min)/130))*10)/10;
+      KS[kd.id]=v; updateKnob(kd.id,v);
+      if(ctx){if(kd.id==='vol'&&eqNodes.vol)eqNodes.vol.gain.value=v/100;else if(eqNodes[kd.id])eqNodes[kd.id].gain.value=v;}
     };
-    const up = () => {
-      window.removeEventListener('mousemove',mv);
-      window.removeEventListener('mouseup',up);
-      window.removeEventListener('touchmove',mv);
-      window.removeEventListener('touchend',up);
-    };
-    window.addEventListener('mousemove',mv);
-    window.addEventListener('mouseup',up);
-    window.addEventListener('touchmove',mv,{passive:false});
-    window.addEventListener('touchend',up);
+    const up=()=>{window.removeEventListener('mousemove',mv);window.removeEventListener('mouseup',up);window.removeEventListener('touchmove',mv);window.removeEventListener('touchend',up);};
+    window.addEventListener('mousemove',mv);window.addEventListener('mouseup',up);
+    window.addEventListener('touchmove',mv,{passive:false});window.addEventListener('touchend',up);
   };
-  knob.addEventListener('mousedown',dn);
-  knob.addEventListener('touchstart',dn,{passive:false});
+  knob.addEventListener('mousedown',dn);knob.addEventListener('touchstart',dn,{passive:false});
 }
 
-function updateKnob(id, v) {
-  const kd=KD.find(k=>k.id===id); if(!kd) return;
-  const a = -135 + (v-kd.min)/(kd.max-kd.min)*270;
-  const d = document.getElementById('kd-'+id);  if(d)  d.style.transform=`translateX(-50%) rotate(${a}deg)`;
-  const ve= document.getElementById('kv-'+id);  if(ve) ve.textContent=fmtK(id,v);
+function updateKnob(id,v){
+  const kd=KD.find(k=>k.id===id); if(!kd)return;
+  const a=-135+(v-kd.min)/(kd.max-kd.min)*270;
+  const d=document.getElementById('kd-'+id); if(d)d.style.transform=`translateX(-50%) rotate(${a}deg)`;
+  const ve=document.getElementById('kv-'+id); if(ve)ve.textContent=fmtK(id,v);
 }
 
-function fmtK(id,v) { return id==='vol' ? Math.round(v)+'%' : (v>=0?'+':'')+v.toFixed(1)+'dB'; }
-
-/* ═══════════════════════════════════════════
-   Utils
-═══════════════════════════════════════════ */
-function rnd(a,b)     { return a+Math.random()*(b-a); }
-function clamp(v,a,b) { return Math.max(a,Math.min(b,v)); }
-function sleep(ms)    { return new Promise(r=>setTimeout(r,ms)); }
+/* ── utils ── */
+function fmtK(id,v){return id==='vol'?Math.round(v)+'%':(v>=0?'+':'')+v.toFixed(1)+'dB';}
+function fmtHz(v){return v>=1000?(v/1000).toFixed(1)+'kHz':Math.round(v)+'Hz';}
+function setSt(msg,dot){document.getElementById('sstatus').textContent=msg;document.getElementById('sdot').className='dot'+(dot?' '+dot:'');}
+function setPr(p){document.getElementById('prog').style.width=p+'%';}
+function setMsg(t,c){const e=document.getElementById('micmsg');e.textContent=t;e.className='msg'+(c?' '+c:'');}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
 buildKnobs();
 </script>
